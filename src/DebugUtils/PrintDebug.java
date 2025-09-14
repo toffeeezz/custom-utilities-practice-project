@@ -1,12 +1,13 @@
 package DebugUtils;
 
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 
-public class SystemPrints {
+public class PrintDebug {
 
     /**
      *
-     * @NOTICE  The whole utility right now can only accept an {@code Object, String, int, boolean, double, char, long,} and {@code float}
+     * @NOTICE  The whole print methods right now can only accept an {@code Object, String, int, boolean, double, char, long,} and {@code float}
      *
      * Prints on the same line
      * @params {@code x} The value to be printed
@@ -79,8 +80,16 @@ public class SystemPrints {
      * Checks whether an image is successfully loaded or not
      * @param img The image to be debugged
      */
-    public static void isImageLoadedPrint(Image img){
+    public static void checkImageLoad(Image img){
         linePrint("Image error? " + img.isError());
         if(img.isError()) throw new RuntimeException(img.getException().getCause());
+    }
+
+    /**
+     * Checks whether a font is loaded properly
+     * @param font The font to be debugged
+     */
+    public static void checkFontLoad(Font font){
+        if(font == null) linePrint("Font Failed to Load");
     }
 }
