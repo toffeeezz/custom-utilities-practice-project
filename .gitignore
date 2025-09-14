@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 !.idea
 !CustomUtilities.iml
+!/src/Main.java
 
 ### Eclipse ###
 .apt_generated
