@@ -34,10 +34,10 @@ public class CustomNodes {
     * @param styleClass Optional custom styling using css
     * @return The button
     */
-    public Button newButton(String txt, Font font, String styleClass, ActionEvent event){
+    public static Button newButton(String txt, Font font, String styleClass, ActionEvent event){
         Button button = new Button(txt);
         button.setFont(font);
-        button.setOnAction(_ -> event.run());
+        if(event != null) button.setOnAction(_ -> event.run());
         if(styleClass != null) button.getStyleClass().add(styleClass);
         return button;
     }
@@ -53,7 +53,7 @@ public class CustomNodes {
     * @param lockSize The option whether to lock the size of the button to its width and height
     * @return The button
     */
-    public Button newButton(String txt, double width, double height, Font font, String styleClass, boolean lockSize,  ActionEvent event){
+    public static Button newButton(String txt, double width, double height, Font font, String styleClass, boolean lockSize,  ActionEvent event){
         Button button = new Button(txt);
         button.setFont(font);
         button.setPrefWidth(width);
@@ -62,7 +62,7 @@ public class CustomNodes {
             button.setMaxWidth(width);
             button.setMaxHeight(height);
         }
-        button.setOnAction(_ -> event.run());
+        if(event != null) button.setOnAction(_ -> event.run());
         if(styleClass != null) button.getStyleClass().add(styleClass);
         return button;
     }
@@ -73,9 +73,9 @@ public class CustomNodes {
     * @param styleSheet  Optional styling using css
     * @return The scene
     */
-    public Scene newEmptyScene(Parent parent, String styleSheet){
+    public static Scene newEmptyScene(Parent parent, String styleSheet){
         Scene scene = new Scene(parent);
-        if(styleSheet != null) scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(styleSheet)).toExternalForm());
+        if(styleSheet != null) scene.getStylesheets().add(Objects.requireNonNull(CustomNodes.class.getResource(styleSheet)).toExternalForm());
         return scene;
     }
 
@@ -87,9 +87,9 @@ public class CustomNodes {
      * @param styleSheet Optional styling using css
      * @return The scene
      */
-    public Scene newEmptyScene(Parent parent, double width, double height, String styleSheet){
+    public static Scene newEmptyScene(Parent parent, double width, double height, String styleSheet){
         Scene scene = new Scene(parent, width, height);
-        if(styleSheet != null) scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(styleSheet)).toExternalForm());
+        if(styleSheet != null) scene.getStylesheets().add(Objects.requireNonNull(CustomNodes.class.getResource(styleSheet)).toExternalForm());
         return scene;
     }
 
@@ -101,7 +101,7 @@ public class CustomNodes {
      * @param styleClass Optional styling using css
      * @return The label
      */
-    public Label newLabel(String txt, Paint color, Font font, String styleClass){
+    public static Label newLabel(String txt, Paint color, Font font, String styleClass){
         Label label = new Label(txt);
         label.setTextFill(color);
         label.setFont(font);
@@ -167,7 +167,7 @@ public class CustomNodes {
      * @return The combo box
      * @param <T> The variable type of the values
      */
-    public <T> ComboBox<T> newComboBox(ObservableList<T> values, T defaultValue, String styleClass){
+    public static  <T> ComboBox<T> newComboBox(ObservableList<T> values, T defaultValue, String styleClass){
         ComboBox<T> comboBox = new ComboBox<>();
         comboBox.getItems().addAll(values);
         if(styleClass != null) comboBox.getStyleClass().add(styleClass);
@@ -185,7 +185,7 @@ public class CustomNodes {
      * @return The combo box
      * @param <T> The variable type of the values
      */
-    public <T> ComboBox<T> newComboBox(ObservableList<T> values, T defaultValue, double width, double height, String styleClass){
+    public static  <T> ComboBox<T> newComboBox(ObservableList<T> values, T defaultValue, double width, double height, String styleClass){
         ComboBox<T> comboBox = new ComboBox<>();
         comboBox.getItems().addAll(values);
         if(width != 0) comboBox.setPrefWidth(width);
