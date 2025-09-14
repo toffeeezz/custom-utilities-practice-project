@@ -1,9 +1,11 @@
 package JavaFXUtils;
 
 import ImportUtils.ImageLoader;
+import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,14 +31,14 @@ public class CustomNodes {
     * @param txt The text to be displayed on the button
     * @param font The font style of the text
     * @param event The action to be executed when clicking the button
-    * @param cssStyle Optional custom styling using css
+    * @param styleClass Optional custom styling using css
     * @return The button
     */
-    public Button newButton(String txt, Font font, String cssStyle, ActionEvent event){
+    public Button newButton(String txt, Font font, String styleClass, ActionEvent event){
         Button button = new Button(txt);
         button.setFont(font);
         button.setOnAction(_ -> event.run());
-        if(cssStyle != null) button.getStyleClass().add(cssStyle);
+        if(styleClass != null) button.getStyleClass().add(styleClass);
         return button;
     }
 
@@ -47,11 +49,11 @@ public class CustomNodes {
     * @param height The height of the button
     * @param font The font style of the text
     * @param event The action to be executed when clicking the button
-    * @param cssStyle Optional custom styling using css
+    * @param styleClass Optional custom styling using css
     * @param lockSize The option whether to lock the size of the button to its width and height
     * @return The button
     */
-    public Button newButton(String txt, double width, double height, Font font, String cssStyle, boolean lockSize,  ActionEvent event){
+    public Button newButton(String txt, double width, double height, Font font, String styleClass, boolean lockSize,  ActionEvent event){
         Button button = new Button(txt);
         button.setFont(font);
         button.setPrefWidth(width);
@@ -61,7 +63,7 @@ public class CustomNodes {
             button.setMaxHeight(height);
         }
         button.setOnAction(_ -> event.run());
-        if(cssStyle != null) button.getStyleClass().add(cssStyle);
+        if(styleClass != null) button.getStyleClass().add(styleClass);
         return button;
     }
 
@@ -96,14 +98,14 @@ public class CustomNodes {
      * @param txt The text for the label to display
      * @param color The color for the text
      * @param font The font for the text
-     * @param cssStyle Optional styling using css
+     * @param styleClass Optional styling using css
      * @return The label
      */
-    public Label newLabel(String txt, Paint color, Font font, String cssStyle){
+    public Label newLabel(String txt, Paint color, Font font, String styleClass){
         Label label = new Label(txt);
         label.setTextFill(color);
         label.setFont(font);
-        if(cssStyle != null) label.getStyleClass().add(cssStyle);
+        if(styleClass != null) label.getStyleClass().add(styleClass);
         return label;
     }
 
@@ -155,5 +157,41 @@ public class CustomNodes {
         imageView.setFitHeight(height);
         imageView.setPreserveRatio(preserveRatio);
         return imageView;
+    }
+
+    /**
+     *
+     * @param values The values that will be listed in the combo box
+     * @param defaultValue The default value that will be selected and displayed
+     * @param styleClass Optional styling using css
+     * @return The combo box
+     * @param <T> The variable type of the values
+     */
+    public <T> ComboBox<T> newComboBox(ObservableList<T> values, T defaultValue, String styleClass){
+        ComboBox<T> comboBox = new ComboBox<>();
+        comboBox.getItems().addAll(values);
+        if(styleClass != null) comboBox.getStyleClass().add(styleClass);
+        if(defaultValue != null) comboBox.setValue(defaultValue);
+        return comboBox;
+    }
+
+    /**
+     *
+     * @param values The values that will be listed in the combo box
+     * @param defaultValue The default value that will be selected and displayed
+     * @param width The preferred width of the combo box (Set it to 0 for default)
+     * @param height The preferred height of the combo box (Set it to 0 for default)
+     * @param styleClass Optional styling using css
+     * @return The combo box
+     * @param <T> The variable type of the values
+     */
+    public <T> ComboBox<T> newComboBox(ObservableList<T> values, T defaultValue, double width, double height, String styleClass){
+        ComboBox<T> comboBox = new ComboBox<>();
+        comboBox.getItems().addAll(values);
+        if(width != 0) comboBox.setPrefWidth(width);
+        if(height != 0) comboBox.setPrefHeight(height);
+        if(styleClass != null) comboBox.getStyleClass().add(styleClass);
+        if(defaultValue != null) comboBox.setValue(defaultValue);
+        return comboBox;
     }
 }
