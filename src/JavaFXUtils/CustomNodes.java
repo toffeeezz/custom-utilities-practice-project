@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
+import java.nio.file.Paths;
 import java.util.Objects;
 
 public class CustomNodes {
@@ -75,7 +76,13 @@ public class CustomNodes {
     */
     public static Scene newEmptyScene(Parent parent, String styleSheet){
         Scene scene = new Scene(parent);
-        if(styleSheet != null) scene.getStylesheets().add(Objects.requireNonNull(CustomNodes.class.getResource(styleSheet)).toExternalForm());
+        if(styleSheet != null){
+            try{
+                scene.getStylesheets().add(Objects.requireNonNull(CustomNodes.class.getResource(styleSheet)).toExternalForm());
+            }catch (RuntimeException e){
+                scene.getStylesheets().add(Paths.get(styleSheet).toUri().toString());
+            }
+        }
         return scene;
     }
 
@@ -89,7 +96,13 @@ public class CustomNodes {
      */
     public static Scene newEmptyScene(Parent parent, double width, double height, String styleSheet){
         Scene scene = new Scene(parent, width, height);
-        if(styleSheet != null) scene.getStylesheets().add(Objects.requireNonNull(CustomNodes.class.getResource(styleSheet)).toExternalForm());
+        if(styleSheet != null){
+            try{
+                scene.getStylesheets().add(Objects.requireNonNull(CustomNodes.class.getResource(styleSheet)).toExternalForm());
+            }catch (RuntimeException e){
+                scene.getStylesheets().add(Paths.get(styleSheet).toUri().toString());
+            }
+        }
         return scene;
     }
 
